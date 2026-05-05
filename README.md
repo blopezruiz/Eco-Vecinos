@@ -1,5 +1,5 @@
 # 🌿 EcoVecinos
-<img width="400" height="400" alt="logo" src="https://github.com/user-attachments/assets/a98595ce-01cb-4065-9892-45dbe3457386" />
+<img width="400" height="300" alt="logo" src="https://github.com/user-attachments/assets/a98595ce-01cb-4065-9892-45dbe3457386" />
 
 **Plataforma comunitaria de intercambio de alimentos entre vecinos**
 
