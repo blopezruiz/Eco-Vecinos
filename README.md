@@ -2,7 +2,7 @@
 
 **Plataforma comunitaria de intercambio de alimentos entre vecinos**
 
-<img width="129" height="72" alt="logo" src="https://github.com/user-attachments/assets/a98595ce-01cb-4065-9892-45dbe3457386" />
+<img width="300" height="200" alt="logo" src="https://github.com/user-attachments/assets/a98595ce-01cb-4065-9892-45dbe3457386" />
 
 
 > Proyecto Intermodular — ASIR 2  
