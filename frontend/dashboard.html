@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoVecinos — Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos_dashboard.css">
+ <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2E7D32">
+  <link rel="apple-touch-icon" href="images/icon-192_v2.png">
+  <link rel="icon" href="images/icon-192_v2.png">
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════════ -->
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" href="index.html">
+      <div class="logo-img">
+        <img src="images/logo.png" alt="EcoVecinos">
+      </div>
+      <span class="logo-text">EcoVecinos</span>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="nav-seccion">Navegación</div>
+      <button class="nav-btn" data-section="inicio">🏠 Inicio</button>
+      <button class="nav-btn" data-section="mis-alimentos">🥕 Mis alimentos</button>
+      <button class="nav-btn" data-section="intercambios">🔄 Intercambios</button>
+      <button class="nav-btn" data-section="mi-barrio">📍 Mi barrio</button>
+      <button class="nav-btn" data-section="ranking">🏆 Ranking</button>
+      <button class="nav-btn" data-section="chats-intercambios">💬 Chats</button>
+      <button class="nav-btn" data-section="perfil">👤 Perfil</button>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebar-avatar">U</div>
+      <div id="sidebar-nombre">Usuario</div>
+      <div id="sidebar-puntos">0 pts</div>
+      <button id="btn-logout" class="btn-cerrar">Cerrar sesión</button>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+  ══════════════════════════════════════════ -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1 id="topbar-saludo">Hola, vecino/a 👋</h1>
+      <button id="btn-abrir-form" class="btn-nuevo">+ Publicar alimento</button>
+    </header>
+
+    <!-- ── SECCIÓN: INICIO ────────────────────────────── -->
+    <section id="inicio" class="seccion-dashboard">
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Mis publicaciones</div>
+          <div class="stat-valor" id="stat-publicaciones">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Intercambios</div>
+          <div class="stat-valor" id="stat-intercambios">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Puntos verdes</div>
+          <div class="stat-valor stat-verde" id="stat-puntos">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">CO₂ evitado</div>
+          <div class="stat-valor stat-tierra" id="stat-co2">0 kg</div>
+        </div>
+      </div>
+
+      <div class="card-bloque">
+        <h2>Alimentos disponibles en tu barrio</h2>
+        <div class="filtros">
+          <div class="filtro activo" data-cat="">Todos</div>
+          <div class="filtro" data-cat="fruta">🍎 Fruta</div>
+          <div class="filtro" data-cat="verdura">🥦 Verdura</div>
+          <div class="filtro" data-cat="pan">🍞 Pan</div>
+          <div class="filtro" data-cat="lacteos">🧀 Lácteos</div>
+          <div class="filtro" data-cat="otros">📦 Otros</div>
+        </div>
+        <div id="lista-alimentos" class="alimentos-grid">
+          <div class="vacio">
+            <div class="vacio-icon">🌿</div>
+            <p>Cargando alimentos...</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── SECCIÓN: MIS ALIMENTOS ───────────────────────── -->
+    <section id="mis-alimentos" class="seccion-dashboard" style="display:none;">
+      <h2>Mis alimentos publicados</h2>
+      <div id="lista-mis-alimentos" class="alimentos-grid">
+        <div class="vacio">
+          <div class="vacio-icon">🥕</div>
+          <p>Aún no has publicado nada. ¡Comparte tu primer alimento!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECCIÓN: INTERCAMBIOS ──────────────────────────── -->
+    <section id="intercambios" class="seccion-dashboard" style="display:none;">
+      <h2>Intercambios</h2>
+      <h3>Recibidos</h3>
+      <div id="intercambios-recibidos">
+        <div class="vacio"><p>Sin intercambios recibidos</p></div>
+      </div>
+      <h3>Enviados</h3>
+      <div id="intercambios-enviados">
+        <div class="vacio"><p>Sin intercambios enviados</p></div>
+      </div>
+    </section>
+
+    <!-- ── SECCIÓN: MI BARRIO ────────────────────────────── -->
+    <section id="mi-barrio" class="seccion-dashboard" style="display:none;">
+      <h2>Mi barrio</h2>
+      <div class="card-bloque">
+        <p style="color:var(--texto-suave); font-size:0.95rem;">Información de tu comunidad y estadísticas del barrio próximamente.</p>
+      </div>
+    </section>
+
+    <!-- ── SECCIÓN: RANKING ──────────────────────────────── -->
+    <section id="ranking" class="seccion-dashboard" style="display:none;">
+      <h2>Ranking de vecinos</h2>
+      <div id="lista-ranking">
+        <div class="vacio"><div class="vacio-icon">🏆</div><p>Cargando ranking...</p></div>
+      </div>
+    </section>
+
+    <!-- ── SECCIÓN: CHATS ────────────────────────────────── -->
+    <section id="chats-intercambios" class="seccion-dashboard" style="display:none;">
+      <h2>Chats de intercambios</h2>
+      <div id="lista-chats-intercambios" class="alimentos-grid">
+        <div class="vacio"><p>Sin chats de intercambio activos</p></div>
+      </div>
+
+      <div id="chat-intercambio-contenedor" class="chat-intercambio-contenedor">
+        <div class="chat-intercambio-header">
+          <span id="chat-intercambio-titulo">Chat</span>
+        </div>
+        <div id="chat-intercambio-historial" class="chat-historial"></div>
+        <form id="chat-intercambio-form" class="chat-form">
+          <input id="chat-intercambio-input" type="text" placeholder="Escribe un mensaje..." autocomplete="off">
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ── SECCIÓN: PERFIL ──────────────────────────────── -->
+    <section id="perfil" class="seccion-dashboard" style="display:none;">
+      <h2>Mi perfil</h2>
+      <div id="perfil-contenido"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="EcoVecinos">
+      </div>
+      <p>© 2026 EcoVecinos — Comunidad sostenible</p>
+      <p>Hecho con 💚 para reducir el desperdicio</p>
+    </footer>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       MODAL PUBLICAR ALIMENTO
+  ══════════════════════════════════════════ -->
+  <div id="modal-alimento" class="modal">
+    <div class="modal-contenido">
+      <button id="modal-alimento-cerrar" class="modal-cerrar">✕</button>
+      <h2>Publicar alimento</h2>
+
+      <form id="foodForm" enctype="multipart/form-data">
+        <div class="form-grupo">
+          <label>Nombre del alimento</label>
+          <input type="text" name="nombre" placeholder="Ej: Manzanas, Pan de pueblo…" required>
+        </div>
+        <div class="form-grupo">
+          <label>Categoría</label>
+          <select name="categoria" required>
+            <option value="" disabled selected>Selecciona categoría</option>
+            <option value="fruta">🍎 Fruta</option>
+            <option value="verdura">🥦 Verdura</option>
+            <option value="pan">🍞 Pan</option>
+            <option value="lacteos">🧀 Lácteos</option>
+            <option value="otros">📦 Otros</option>
+          </select>
+        </div>
+        <div class="form-grupo">
+          <label>Fecha de caducidad</label>
+          <input type="date" name="fecha_caducidad" required>
+        </div>
+        <div class="form-grupo">
+          <label>Foto del alimento (opcional)</label>
+          <input type="file" name="imagen" accept="image/*">
+        </div>
+        <div class="form-grupo">
+          <label>Ticket de compra (opcional)</label>
+          <input type="file" name="ticket" accept="image/*,application/pdf">
+        </div>
+        <button type="submit" class="btn-guardar" id="btn-publicar">Publicar alimento 🌿</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODAL TICKET
+  ══════════════════════════════════════════ -->
+  <div id="modal-ticket" class="modal-ticket">
+    <div class="modal-ticket-contenido">
+      <button id="modal-ticket-cerrar" class="modal-cerrar">✕</button>
+      <iframe id="modal-ticket-frame" class="modal-ticket-frame" title="Ticket"></iframe>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CHAT GLOBAL DEL BARRIO
+  ══════════════════════════════════════════ -->
+  <button id="btn-chat-global" class="btn-chat-global" title="Chat del barrio">💬</button>
+
+  <div id="chat-global" class="chat-global">
+    <div class="chat-global-header">
+      <span>💬 Chat del barrio</span>
+      <button id="chat-global-cerrar">✕</button>
+    </div>
+    <div id="chat-global-historial" class="chat-historial"></div>
+    <form id="chat-global-form" class="chat-form">
+      <input id="chat-global-input" type="text" placeholder="Escribe al barrio…" autocomplete="off">
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <!-- JS -->
+<!-- Nav inferior móvil -->
+<nav class="mobile-nav">
+  <button class="mobile-nav-btn activa" data-section="inicio">
+    <span class="nav-icon">🏠</span>
+    <span>Inicio</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="mis-alimentos">
+    <span class="nav-icon">🥕</span>
+    <span>Mis alimentos</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="intercambios">
+    <span class="nav-icon">🔄</span>
+    <span>Intercambios</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="mi-barrio">
+    <span class="nav-icon">📍</span>
+    <span>Barrio</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="ranking">
+    <span class="nav-icon">🏆</span>
+    <span>Ranking</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="chats-intercambios">
+    <span class="nav-icon">💬</span>
+    <span>Chats</span>
+  </button>
+  <button class="mobile-nav-btn" data-section="perfil">
+    <span class="nav-icon">👤</span>
+    <span>Perfil</span>
+  </button>
+  <button class="mobile-nav-btn" id="mobile-logout">
+    <span class="nav-icon">🚪</span>
+    <span>Salir</span>
+  </button>
+</nav>
+
+<script src="js/app.js"></script>
+
+  <script src="js/app.js"></script>
+
+ <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js') 
+      .then(() => console.log('[PWA] Service Worker registrado'))
+      .catch(e => console.error('[PWA] Error:', e));
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoVecinos — Acceso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2E7D32">
+  <link rel="apple-touch-icon" href="images/icon-192_v2.png">
+  <link rel="icon" href="images/icon-192_v2.png"> 
+</head>
+
+<body class="login-page">
+
+  <div class="login-wrapper">
+
+    <!-- PANEL IZQUIERDO -->
+    <div class="panel-izq">
+      <div>
+        <a href="index.html" class="logo">
+          <div class="logo-img">
+            <img src="images/logo.png" alt="EcoVecinos" class="logo-real">
+          </div>
+        </a>
+        <h2 style="margin-top:2rem;">Comparte comida,<br><em>conecta con tu barrio</em></h2>
+        <p style="margin-top:1rem; opacity:0.85; font-size:0.98rem; line-height:1.7;">
+          Evita que la comida se desperdicie y ayuda a tus vecinos con lo que te sobra.
+        </p>
+      </div>
+
+      <div class="testimonio">
+        <p class="testimonio-texto">
+          "Desde que usamos EcoVecinos, en mi portal casi no se tira comida.
+          Y he conocido a gente majísima."
+        </p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">M</div>
+          <div>
+            <div class="autor-nombre">Marta, 3ºB</div>
+            <div class="autor-info">Vecina desde 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="panel-der">
+      <div class="form-container">
+
+        <!-- TABS -->
+        <div class="tabs">
+          <div class="tab activo" id="tab-login">Entrar</div>
+          <div class="tab" id="tab-registro">Crear cuenta</div>
+        </div>
+
+        <!-- MENSAJE DE ESTADO -->
+        <div id="msg-estado" style="display:none; padding:0.75rem 1rem; border-radius:10px; font-size:0.88rem; margin-bottom:1rem;"></div>
+
+        <!-- LOGIN -->
+        <div id="vista-login">
+          <h1 class="form-title">Bienvenido de nuevo</h1>
+          <p class="form-subtitle">Accede para ver los alimentos disponibles en tu barrio.</p>
+
+          <form id="loginForm" autocomplete="on">
+            <div class="campo">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" name="email" placeholder="tu@email.com" required autocomplete="email">
+            </div>
+            <div class="campo">
+              <label for="login-password">Contraseña</label>
+              <input type="password" id="login-password" name="password" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-submit" id="btn-login">Entrar →</button>
+          </form>
+        </div>
+
+        <!-- REGISTRO -->
+        <div id="vista-registro" style="display:none;">
+          <h1 class="form-title">Crea tu cuenta</h1>
+          <p class="form-subtitle">Únete a EcoVecinos y empieza a compartir comida.</p>
+
+          <form id="registroForm" autocomplete="on">
+            <div class="campo">
+              <label for="reg-nombre">Nombre</label>
+              <input type="text" id="reg-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
+            </div>
+            <div class="campo">
+              <label for="reg-email">Email</label>
+              <input type="email" id="reg-email" name="email" placeholder="tu@email.com" required autocomplete="email">
+            </div>
+            <div class="campo">
+              <label for="reg-barrio">Barrio / Portal</label>
+              <input type="text" id="reg-barrio" name="barrio" placeholder="Ej: Portal 3, Calle Mayor" required>
+            </div>
+            <div class="campo">
+              <label for="reg-password">Contraseña</label>
+              <input type="password" id="reg-password" name="password" placeholder="Mínimo 8 caracteres" required minlength="8" autocomplete="new-password">
+            </div>
+            <button type="submit" class="btn-submit" id="btn-registro">Crear cuenta →</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="images/logo.png" alt="EcoVecinos">
+    </div>
+    <p>© 2026 EcoVecinos — Comunidad sostenible</p>
+    <p>Hecho con 💚 para reducir el desperdicio</p>
+  </footer>
+
+  <script>
+    /* ── TABS ─────────────────────────────────────────── */
+    const tabLogin    = document.getElementById('tab-login');
+    const tabRegistro = document.getElementById('tab-registro');
+    const vistaLogin  = document.getElementById('vista-login');
+    const vistaReg    = document.getElementById('vista-registro');
+    const msgEstado   = document.getElementById('msg-estado');
+
+    function ocultarMsg() {
+      msgEstado.style.display = 'none';
+      msgEstado.textContent = '';
+    }
+
+    function mostrarMsg(texto, tipo) {
+      msgEstado.style.display = 'block';
+      msgEstado.textContent = texto;
+      msgEstado.style.background = tipo === 'ok' ? '#E8F5E9' : '#FFEBEE';
+      msgEstado.style.color      = tipo === 'ok' ? '#2E7D32' : '#c62828';
+      msgEstado.style.border     = tipo === 'ok' ? '1px solid #A5D6A7' : '1px solid #FFCDD2';
+    }
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('activo');
+      tabRegistro.classList.remove('activo');
+      vistaLogin.style.display = 'block';
+      vistaReg.style.display   = 'none';
+      ocultarMsg();
+    });
+
+    tabRegistro.addEventListener('click', () => {
+      tabRegistro.classList.add('activo');
+      tabLogin.classList.remove('activo');
+      vistaReg.style.display   = 'block';
+      vistaLogin.style.display = 'none';
+      ocultarMsg();
+    });
+
+    /* ── LOGIN ────────────────────────────────────────── */
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ocultarMsg();
+      const btn = document.getElementById('btn-login');
+      btn.textContent = 'Entrando...';
+      btn.disabled = true;
+
+      const fd = new FormData(e.target);
+      fd.append('action', 'login');
+
+      try {
+        const res  = await fetch('/backend/api.php', { method: 'POST', body: fd });
+        const data = await res.json();
+
+        if (data.status === 'ok') {
+          localStorage.setItem('userId', data.usuario.id);
+          localStorage.setItem('userName', data.usuario.nombre);
+          mostrarMsg('¡Bienvenido/a! Redirigiendo…', 'ok');
+          setTimeout(() => { window.location.href = 'dashboard.html'; }, 600);
+        } else {
+          mostrarMsg(data.mensaje || 'Credenciales incorrectas', 'error');
+          btn.textContent = 'Entrar →';
+          btn.disabled = false;
+        }
+      } catch {
+        mostrarMsg('Error de conexión con el servidor', 'error');
+        btn.textContent = 'Entrar →';
+        btn.disabled = false;
+      }
+    });
+
+    /* ── REGISTRO ─────────────────────────────────────── */
+    document.getElementById('registroForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ocultarMsg();
+      const btn = document.getElementById('btn-registro');
+      btn.textContent = 'Creando cuenta...';
+      btn.disabled = true;
+
+      const fd = new FormData(e.target);
+      fd.append('action', 'registro');
+
+      try {
+        const res  = await fetch('/backend/api.php', { method: 'POST', body: fd });
+        const data = await res.json();
+
+        if (data.status === 'ok') {
+          mostrarMsg('¡Cuenta creada! Ya puedes iniciar sesión.', 'ok');
+          e.target.reset();
+          setTimeout(() => { tabLogin.click(); }, 1500);
+        } else {
+          mostrarMsg(data.mensaje || 'Error al registrar', 'error');
+        }
+      } catch {
+        mostrarMsg('Error de conexión con el servidor', 'error');
+      }
+
+      btn.textContent = 'Crear cuenta →';
+      btn.disabled = false;
+    });
+  </script>
+
+ <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js') 
+      .then(() => console.log('[PWA] Service Worker registrado'))
+      .catch(e => console.error('[PWA] Error:', e));
+  }
+</script>
+
+</body>
+</html>
